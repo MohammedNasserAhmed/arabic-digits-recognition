@@ -5,7 +5,7 @@ import logging
 #logging string
 logging.basicConfig(level=logging.INFO, format='[%(asctime)s]: %(message)s:')
 
-project_name = 'arabic-digits-recognition'
+project_name = 'ard'
 
 list_of_files = [
     ".github/workflows/.gitkeep",
