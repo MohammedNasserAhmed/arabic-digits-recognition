@@ -1,0 +1,12 @@
+pandas
+numpy 
+matplotlib
+python-box
+pyYAML
+types-pyYAML
+joblib
+mlflow
+librosa
+tqdm
+pydantic
+-e .
