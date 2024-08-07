@@ -1,0 +1,6 @@
+TARGET_SAMPLE_RATE : 16000
+NUM_SAMPLES : 16000
+SPLIT_SIZE : 0.2
+NUM_MFCC : 13
+SPEC_KWARGS : {'sr': 16000, 'n_mfcc': 13, 'n_fft': 2048, 'hop_length': 32}
+RANDOM_STATE : 42

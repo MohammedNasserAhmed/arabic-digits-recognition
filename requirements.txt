@@ -9,4 +9,5 @@ mlflow
 librosa
 tqdm
 pydantic
+ipykernel
 -e .

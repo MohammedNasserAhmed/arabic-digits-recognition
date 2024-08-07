@@ -1,0 +1,19 @@
+artifacts_root: artifacts
+
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion/adr_ds
+  source_path: E:\MyOnlineCourses\ML_Projects\ADR\ArabDIGdtEnPool
+  arclasses_path: E:\MyOnlineCourses\ML_Projects\ADR\ArabDIGdt
+  data_file: artifacts/data_ingestion/adr_ds.npz
+  csv_file : artifacts/data_ingestion/metadata.csv
+
+data_preprocessing:
+  root_dir: artifacts/data_preprocessing
+  source_path: artifacts/data_ingestion/adr_ds.npz
+  data_file: artifacts/data_preprocessing/adr_pca_ds.npz
+
+data_preparation:
+  root_dir: artifacts/data_preprocessing
+  origin_data_path: artifacts/data_ingestion/adr_ds.npz
+  processed_data_path: artifacts/data_preprocessing/adr_pca_ds.npz
