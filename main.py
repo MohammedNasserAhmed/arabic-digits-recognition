@@ -1,10 +1,10 @@
-from ard import logger
-from ard.pipeline.phase_01_data_ingestion import DataIngestionPipeline
-from ard.pipeline.phase_02_data_preprocessing import DataPreprocessPipeline
-from ard.pipeline.phase_001_tf_data_ingestion import DataTFIngestionPipeline
-from ard.pipeline.phase_002_tf_model_training import ModelTrainingPipeline
-from ard.pipeline.phase_003_model_evaluation import ModelEvaluationPipeline
-from ard.pipeline.phase_004_model_inference import ModelInferencePipeline
+from adr import logger
+from adr.pipeline.phase_01_data_ingestion import DataIngestionPipeline
+from adr.pipeline.phase_02_data_preprocessing import DataPreprocessPipeline
+from adr.pipeline.phase_001_tf_data_ingestion import DataTFIngestionPipeline
+from adr.pipeline.phase_002_tf_model_training import ModelTrainingPipeline
+from adr.pipeline.phase_003_model_evaluation import ModelEvaluationPipeline
+from adr.pipeline.phase_004_model_inference import ModelInferencePipeline
 
 """ PHASE_ID = "Data Ingestion"
 try:

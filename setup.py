@@ -5,7 +5,7 @@ from pathlib import Path
 from setuptools import setup, find_packages
 
 # Constants
-VERSION = "0.0.3"
+VERSION = "0.0.4"
 REPO_NAME = "arabic-digits-recognition"
 AUTHOR = "MohammedNasserAhmed"
 PACKAGE_NAME = "adr"
