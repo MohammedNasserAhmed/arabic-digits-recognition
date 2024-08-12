@@ -6,7 +6,7 @@ from tqdm import tqdm
 import time
 from ard.utils.common import get_wav_path, get_wav_label, Signal
 from ard.utils.preprocess import WVLoader, MFCCExtractor, save_metadata
-from ard.utils.transformer import  MinMaxScaler, Standardiser, TransformsChain, MFCC
+from ard.utils.transformer import  MinMaxScaler, Standardiser, TransformsChain
 from ard.entity.config_entity import DataIngestionConfig
 
 class DataIngestion:
@@ -51,10 +51,10 @@ class DataIngestion:
                 wav_path = get_wav_path(file_name, self._source_path)
                 label = get_wav_label(file_name)
                 waveform = self.loader.load(file = wav_path,sample_rate= self._target_sample_rate)
-                mfcc_signal = self.extractor.mfcc(data=waveform, spec_kwargs=self._transform_kwargs)
+                mfcc_signal = self.extractor.mfcc(audio=waveform, spec_kwargs=self._transform_kwargs)
                 signal = Signal(name = file_name.split('\\')[-1], data=mfcc_signal, samplerate=self._target_sample_rate, filepath=wav_path)
                 scaled_signal = self.transform_chain.process(signal)
-                _inputs.append(scaled_signal.data)
+                _inputs.append(scaled_signal.data.tolist())
                 _targets.append(label)
                 _lengths.append(scaled_signal.data.shape[0])
                 pbar.update(1)

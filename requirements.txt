@@ -1,6 +1,5 @@
-pandas
-numpy 
-matplotlib
+tensorflow==2.10.0 
+tensorflow-io==0.27.0
 python-box
 pyYAML
 types-pyYAML
@@ -10,4 +9,6 @@ librosa
 tqdm
 pydantic
 ipykernel
+arabic-reshaper
+ensure
 -e .

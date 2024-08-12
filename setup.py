@@ -5,7 +5,7 @@ from pathlib import Path
 from setuptools import setup, find_packages
 
 # Constants
-VERSION = "0.0.1"
+VERSION = "0.0.3"
 REPO_NAME = "arabic-digits-recognition"
 AUTHOR = "MohammedNasserAhmed"
 PACKAGE_NAME = "adr"
@@ -15,21 +15,6 @@ LONG_DESCRIPTION = Path("README.md").read_text(encoding="utf-8")
 GITHUB_URL = f"https://github.com/{AUTHOR}/{REPO_NAME}"
 LICENSE = "Apache License 2.0"
 LICENSE_TROVE = "License :: OSI Approved :: Apache Software License"
-
-# Core dependencies
-REQUIREMENTS = [
-    "pandas",
-    "numpy",
-    "matplotlib",
-    "python-box",
-    "pyYAML",
-    "types-pyYAML",
-    "joblib",
-    "mlflow",
-    "librosa",
-    "tqdm",
-    "pydantic",
-]
 
 
 setup(
@@ -57,6 +42,5 @@ setup(
         "Topic :: Computing/DeepLearning :: Digit Recognition",
     ],
     python_requires=">=3.8",
-    install_requires=REQUIREMENTS,
     license=LICENSE,
 )

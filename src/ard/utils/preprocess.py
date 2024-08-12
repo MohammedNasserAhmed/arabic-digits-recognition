@@ -11,8 +11,7 @@ import librosa
 import numpy as np
 from tqdm import tqdm
 import time
-from ard.utils.common import convert_digits
-
+import tensorflow as tf
 
 
 class WVLoader:
@@ -131,7 +130,7 @@ class MFCCExtractor:
         pass        
     
     
-    def mfcc(self, data, spec_kwargs = None):
+    def mfcc(self, audio, spec_kwargs = None):
         
         """
         Objective:
@@ -141,12 +140,19 @@ class MFCCExtractor:
                    as input and returns the computed MFCCs.
                    
         """
-        mfcc = librosa.feature.mfcc(y=data, **spec_kwargs).T
+        #data = self.frame_audio(audio)
+        mfcc = librosa.feature.mfcc(y=audio, **spec_kwargs).T
         
         return mfcc
-
-#import arabic_reshaper
-#from bidi.algorithm import get_display
+    
+    def frame_audio(self, audio):
+        input_len = 10000
+        audio = audio[:input_len]
+        zero_padding = np.zeros(
+            [input_len] - tf.shape(audio))
+        audio = tf.cast(audio, dtype=tf.float32)
+        audio = tf.concat([audio, zero_padding], 0)
+        return audio.numpy()
 
 
 class SaveAsCSV:
