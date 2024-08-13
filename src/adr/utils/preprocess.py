@@ -12,8 +12,10 @@ import numpy as np
 from tqdm import tqdm
 import time
 import tensorflow as tf
+from adr.constants import PARAMS_FILE_PATH
+from adr.utils.help import read_yaml
 
-
+params = read_yaml(PARAMS_FILE_PATH)
 class WVLoader:
     """A class for loading audio files into Signal objects."""
 
@@ -40,7 +42,7 @@ class WVLoader:
             "WVLoader is initializing"
         )
 
-    def load(self, file: str, sample_rate: int):
+    def load(self, file: str):
         """
         Load an audio file and return a Signal object.
 
@@ -61,10 +63,10 @@ class WVLoader:
 
         self._validate_file_extension(file_path)
         
-        waveform = self._load_audio(file_path, sample_rate)
+        waveform, sample_rate = self._load_audio(file_path)
         
         #logger.info("Loaded audio file: %s", file.split('\\')[-1])
-        return waveform
+        return waveform, sample_rate
 
     def _validate_file_extension(self, file_path: Path) -> None:
         """
@@ -81,7 +83,7 @@ class WVLoader:
             raise FileExtensionError(f"File extension '{extension}' is not allowed. "
                                      f"Allowed extensions are: {', '.join(self._audio_file_extensions)}")
 
-    def _load_audio(self, file_path: Path, sample_rate: int) -> np.array:
+    def _load_audio(self, file_path: Path) -> np.array:
         """
         Load the audio file using librosa.
 
@@ -99,16 +101,15 @@ class WVLoader:
             waveform, loaded_sample_rate = librosa.load(
                 file_path,
                 mono=self.mono,
-                sr=sample_rate,
                 dtype=np.float32
             )
-            if loaded_sample_rate != sample_rate:
-                logger.warning(
-                    "Loaded sample rate (%d) differs from requested sample rate (%d)",
-                    loaded_sample_rate, sample_rate
-                )
+            # if loaded_sample_rate != sample_rate:
+            #     logger.warning(
+            #         "Loaded sample rate (%d) differs from requested sample rate (%d)",
+            #         loaded_sample_rate, sample_rate
+            #     )
            
-            return waveform
+            return waveform, loaded_sample_rate
         except librosa.LibrosaError as e:
             logger.error("Error loading audio file: %s", str(e))
             raise
@@ -130,7 +131,7 @@ class MFCCExtractor:
         pass        
     
     
-    def mfcc(self, audio, spec_kwargs = None):
+    def mfcc(self, audio, sample_rate):
         
         """
         Objective:
@@ -140,19 +141,24 @@ class MFCCExtractor:
                    as input and returns the computed MFCCs.
                    
         """
-        #data = self.frame_audio(audio)
-        mfcc = librosa.feature.mfcc(y=audio, **spec_kwargs).T
+        #audio = self.frame_audio(audio)
+        mfcc = librosa.feature.mfcc(y=audio, sr=sample_rate, n_mfcc = params['NUM_MFCC'])
         
+       
         return mfcc
     
     def frame_audio(self, audio):
         input_len = 10000
-        audio = audio[:input_len]
-        zero_padding = np.zeros(
-            [input_len] - tf.shape(audio))
-        audio = tf.cast(audio, dtype=tf.float32)
-        audio = tf.concat([audio, zero_padding], 0)
-        return audio.numpy()
+        if tf.shape(audio)[0] < input_len:
+            zero_padding = tf.zeros(
+                [10000] - tf.shape(audio),
+                dtype=tf.float32)
+            audio = tf.cast(audio, dtype=tf.float32)
+            audio = tf.concat([audio, zero_padding], 0)
+        else:
+            audio = audio[:input_len]
+        
+        return np.asarray(audio)
 
 
 class SaveAsCSV:

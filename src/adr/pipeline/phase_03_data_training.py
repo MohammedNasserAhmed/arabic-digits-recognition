@@ -1,29 +1,26 @@
 from adr.config.configuration import ConfigurationManager
-from adr.components.data_ingestion import DataIngestion
+from adr.components.data_training import DataTraining
 from adr import logger
 
-PHASE_ID = "Data Ingestion"
+PHASE_ID = "Data Training"
 
 
-class DataIngestionPipeline:
+class DataTrainingPipeline:
     def __init__(self):
         pass
 
     def main(self):
         config = ConfigurationManager()
-        data_ingestion_config, data_ingestion_params = config.get_data_ingestion_config()
-        data_ingestion = DataIngestion(config=data_ingestion_config, params=data_ingestion_params)
-        dataset = data_ingestion.Load()
-        dataset.save(compress=True)
-        
-
+        data_training_config = config.get_data_training_config()
+        data_training = DataTraining(config=data_training_config)
+        data_training.process()
 
 
 
 if __name__ == '__main__':
     try:
         logger.info(f">>>>>> phase {PHASE_ID} started <<<<<<")
-        obj = DataIngestionPipeline()
+        obj = DataTrainingPipeline()
         obj.main()
         logger.info(f">>>>>> phase {PHASE_ID} done successfully <<<<<<\n\nx==========x")
     except Exception as e:

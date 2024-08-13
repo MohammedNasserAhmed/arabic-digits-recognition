@@ -6,10 +6,20 @@ from pathlib import Path
 class DataIngestionConfig:
     root_dir: Path
     source_path: str
-    arclasses_path: Path
     data_file: Path
-    csv_file: Path
 
+@dataclass(frozen=True)
+class DataPreprocessConfig:
+    root_dir: Path
+    source_path: str
+    data_file: Path
+
+@dataclass(frozen=True)
+class DataTrainingConfig:
+    root_dir: Path
+    origin_data_path: str
+    dst_path:Path
+    
 @dataclass(frozen=True)
 class DataTFIngestionConfig:
     root_dir: Path
@@ -33,8 +43,3 @@ class DataTFInferenceConfig:
     audio_path: str
     model_path: str
     
-@dataclass(frozen=True)
-class DataPreprocessConfig:
-    root_dir: Path
-    source_path: str
-    data_file: Path

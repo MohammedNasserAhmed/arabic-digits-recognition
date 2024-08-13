@@ -2,8 +2,7 @@ TARGET_SAMPLE_RATE : 16000
 NUM_SAMPLES : 16000
 LABELS : ['eight','five','four','nine','one','seven','six','three','two','zero']
 SPLIT_SIZE : 0.2
-NUM_MFCC : 13
-SPEC_KWARGS : {'sr': 16000, 'n_mfcc': 13, 'n_fft': 2048, 'hop_length': 32}
-RANDOM_STATE : 42
+NUM_MFCC : 40
+RANDOM_STATE : 0
 FRAME_LENGTH : 1024
 FRAME_STEP : 512

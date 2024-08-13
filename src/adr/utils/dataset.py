@@ -29,7 +29,7 @@ class SeqDataset:
         self._features_targets_lengths = (self._features, self._targets, self._lengths)
         
         self._idxs = self._get_idxs(self._lengths)
-    def shape(self) -> Tuple[int, int, int]:
+    def shape(self)-> Tuple[int, int, int]:
         """
         Get the shape of the dataset.
 
@@ -38,11 +38,11 @@ class SeqDataset:
         shape: Tuple[int, int, int]
             A tuple containing (num_samples, max_sequence_length, num_features).
         """
-        num_samples = len(self._features)
-        max_sequence_length = max(self._lengths) if self._lengths is not None else self._features.shape[1]
-        num_features = self._features.shape[-1] if self._features.ndim > 2 else 1
+        #num_samples = self._features
+        #max_sequence_length = max(self._lengths) if self._lengths is not None else self._features.shape[1]
+        #num_features = self._features.shape[-1] if self._features.ndim > 2 else 1
 
-        return (num_samples, max_sequence_length, num_features)
+        return self._features.shape
 
     def __str__(self) -> str:
         """
@@ -176,8 +176,8 @@ class SeqDataset:
         
         classes = self._classes
 
-        data_train = SeqDataset(features= np.vstack(X_train), targets=y_train, lengths=lengths_train, classes=classes)
-        data_test = SeqDataset(features= np.vstack(X_test), targets=y_test, lengths=lengths_test, classes=classes)
+        data_train = SeqDataset(features= X_train, targets=y_train, lengths=lengths_train, classes=classes)
+        data_test = SeqDataset(features= X_test, targets=y_test, lengths=lengths_test, classes=classes)
 
         return data_train, data_test
 
