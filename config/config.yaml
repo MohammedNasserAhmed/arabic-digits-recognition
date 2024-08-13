@@ -28,7 +28,8 @@ data_tf_inference:
 
 data_ingestion:
   root_dir: artifacts/SeqDataset/data_ingestion
-  source_path: E:\MyOnlineCourses\ML_Projects\ADR\ArabDigitsAugmented\wavs
+  #source_path: E:\MyOnlineCourses\ML_Projects\ADR\ArabDigitsAugmented\wavs
+  source_path: E:\MyOnlineCourses\ML_Projects\ADR\ArabDIGdtEnPool
   data_file: artifacts/SeqDataset/data_ingestion/adr_ds.npz
 
 data_preprocessing:
@@ -39,4 +40,4 @@ data_preprocessing:
 data_training:
   root_dir: artifacts/SeqDataset/models
   origin_data_path: artifacts/SeqDataset/data_ingestion/adr_ds.npz
-  dst_path: artifacts/SeqDataset/models/ardg_cnn_model.h5
+  dst_path: artifacts/SeqDataset/models/ard_model.h5

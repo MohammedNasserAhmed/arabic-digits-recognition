@@ -6,6 +6,17 @@ import tensorflow as tf
 import tensorflow.keras.models as models
 import tensorflow.keras.layers as layers
 from adr.entity.config_entity import DataTrainingConfig
+
+# results = {
+#     'dataset_size': [],
+#     'X_train_shape': [],
+#     'X_test_shape': [],
+#     'y_train_shape': [],
+#     'y_test_shape': [],
+#     'model_metrics': [],
+#     'model_scores': [],
+#     'model_evaluation': []
+# }
 class DataTraining:
     def __init__(self,
                  config : DataTrainingConfig
@@ -58,8 +69,6 @@ class DataTraining:
         dataset = self.load_npz_data(self._origin_data_path)
         
         logger.info(f"Dataset loaded")
-        X = dataset._features
-        y = dataset._targets
         
         # Split the data
         logger.info("Preparing data for training...")
@@ -77,22 +86,30 @@ class DataTraining:
         
 
         # Convert labels to categorical
-        self.num_classes = len(np.unique(y))
+        self.num_classes = len(np.unique(dataset._targets))
         y_train = tf.keras.utils.to_categorical(y_train, num_classes=self.num_classes)
         y_test = tf.keras.utils.to_categorical(y_test,  num_classes=self.num_classes)
         logger.info(f"Training data shape: {X_train.shape}")
         logger.info(f"Testing data shape: {X_test.shape}")
         logger.info(f"Training labels shape: {y_train.shape}")
         logger.info(f"Testing labels shape: {y_test.shape}")
+        
+        # results['dataset_size'].append(len(dataset._features))
+        # results['X_train_shape'].append(X_train.shape)
+        # results['X_test_shape'].append(X_test.shape)
+        # results['y_train_shape'].append(y_train.shape)
+        # results['y_test_shape'].append(y_test.shape)
 
         return X_train, X_test, y_train, y_test
     
     def build_and_train_model(self, X_train, X_test, y_train, y_test):
-        model = self._create_model()
-        self._compile_model(model)
-        self._train_model(model, X_train, X_test, y_train, y_test)
-
-        model.save(self.config.dst_path)
+        self.model = self._create_model()
+        self._compile_model(self.model)
+        self._train_model(self.model, X_train, X_test, y_train, y_test)
+        # results['model_metrics'].append(self.model.metrics_names)
+        # results['model_scores'].append(self.model.evaluate(X_test, y_test))
+        # results['model_evaluation'].append(self.model.history.history)  # Store the training history
+        self.model.save(self.config.dst_path)
 
     def _create_model(self, filters=32, kernel_size=(3, 3), dense_units=256, dropout_rate=0.2):
         model = models.Sequential([
@@ -131,6 +148,14 @@ class DataTraining:
             epochs=100,
             callbacks = [early_stopping],batch_size=batch_size)
     
+    def get_predictions(self, X_test):
+        # Get the predicted probabilities
+        y_pred_proba = self.model.predict(X_test)
+        
+        # Convert probabilities to class labels
+        y_pred = np.argmax(y_pred_proba, axis=1)
+        
+        return y_pred, y_pred_proba
     def process(self):
         X_train, X_test, y_train, y_test = self.prepare_data()
         self.input_shape=X_train.shape[1:]
