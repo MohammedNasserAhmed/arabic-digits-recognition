@@ -18,31 +18,31 @@
   <img alt="License" src="https://img.shields.io/github/license/mohammednasserahmed/arabic-digits-recognition?color=56BEB8">
   </p>
   <p align="center">
-  <a href="#about">About</a> &#xa0; | &#xa0; 
-  <a href="#features">Features</a> &#xa0; | &#xa0;
-  <a href="#technologies">Technologies</a> &#xa0; | &#xa0;
+  <a href="#about-dart">About</a> &#xa0; | &#xa0; 
+  <a href="#features-star2">Features</a> &#xa0; | &#xa0;
+  <a href="#technologies-checkered_flag">Technologies</a> &#xa0; | &#xa0;
   <a href="#requirements-white_check_mark">Requirements</a> &#xa0; | &#xa0;
-  <a href="#getting-started">Getting Started</a> &#xa0; | &#xa0;
-  <a href="#license">License</a> &#xa0; | &#xa0;
+  <a href="#getting-started-rocket">Getting Started</a> &#xa0; | &#xa0;
+  <a href="#license-pencil">License</a> &#xa0; | &#xa0;
   <a href="https://github.com/mohammednasserahmed" target="_blank">Author</a>  &#xa0; | &#xa0;
-  <a href="#acknowledgments">Acknowledgments</a> &#xa0; | &#xa0;
-  <a href="#contact">Contact</a> &#xa0; | &#xa0;
+  <a href="#acknowledgments-pray">Acknowledgments</a> &#xa0; | &#xa0;
+  <a href="#contact-e-mail">Contact</a> &#xa0; | &#xa0;
 </p>
 
 
 ---
-## About 🎯
+## About :dart:
 
 The **Arabic Digits Recognition** project aims to develop a robust Convolutional Neural Network (CNN) model capable of accurately recognizing spoken Arabic digits. This project leverages a diverse dataset collected from 65 individuals of varying ages and genders, ensuring a comprehensive representation of the Arabic-speaking population. The goal is to facilitate advancements in voice recognition technology and improve accessibility for Arabic speakers.
 
-## Features ✨
+## Features :star2:
 
 - **Diverse Dataset**: Collected from 65 individuals, ensuring representation across different ages and genders.
 - **High Accuracy**: The CNN model achieves impressive accuracy in recognizing Arabic digits.
 - **User-Friendly Interface**: Designed to be easily integrated into applications for digit recognition.
 - **Visualization Tools**: Includes visualizations of training progress and model performance.
 
-## Technologies 🛠️
+## Technologies :checkered_flag:
 
 - **Programming Language**: Python
 - **Framework**: TensorFlow and Keras
@@ -65,7 +65,7 @@ Before starting :checkered_flag:, you need to have the following software instal
 Make sure to follow the installation instructions provided on each link to set up the required tools properly.
 
 
-## Getting Started 🚀
+## Getting Started :rocket:
 
 To get started with the Arabic Digits Recognition project, follow these steps:
 
@@ -85,7 +85,7 @@ To get started with the Arabic Digits Recognition project, follow these steps:
    - **Transform**: Preprocess audio files (e.g., normalization, feature extraction using Mel-frequency cepstral coefficients (MFCCs)).
    - **Load**: Store the processed data into a format suitable for training (e.g., NumPy arrays).
 
-### :: Training the Model 🏋️‍♀️
+#### :: Training the Model 🏋️‍♀️
 
 1. Clone the repository:
    ```bash
@@ -98,21 +98,21 @@ To get started with the Arabic Digits Recognition project, follow these steps:
    python main.py
    ```
 
-## License 📄
+## License :pencil:
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-## Author 👨‍💻
+## Author :coffee:
 
 **M. N. Gaber**  
 *AI & ML.Eng*
 
-## Acknowledgments 🙏
+## Acknowledgments :pray:
 
 - Special thanks to all participants who contributed their voice samples.
 - Thanks to the open-source community for the libraries and frameworks used in this project.
 
-## Contact 📧
+## Contact :e-mail:
 
 For questions or feedback, please reach out to abunasseredu@gmail.com.
 
