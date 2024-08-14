@@ -53,7 +53,6 @@ class DataIngestion:
                 mfcc_signal = self.extractor.mfcc(audio=waveform, sample_rate=sr)
                 signal = Signal(name = file_name.split('\\')[-1], data=mfcc_signal, samplerate=sr, filepath=wav_path)
                 signal = self.transform_chain.process(signal)
-                # Append the MFCC features to the list
               
                
                 _inputs.append(signal.data)

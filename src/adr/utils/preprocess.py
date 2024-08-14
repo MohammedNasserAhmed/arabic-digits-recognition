@@ -103,11 +103,7 @@ class WVLoader:
                 mono=self.mono,
                 dtype=np.float32
             )
-            # if loaded_sample_rate != sample_rate:
-            #     logger.warning(
-            #         "Loaded sample rate (%d) differs from requested sample rate (%d)",
-            #         loaded_sample_rate, sample_rate
-            #     )
+           
            
             return waveform, loaded_sample_rate
         except librosa.LibrosaError as e:

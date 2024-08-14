@@ -172,14 +172,29 @@ class convert_digits:
     
     
 
-def get_wav_path(file_name, aud_dir):
-        path = os.path.join(aud_dir, file_name)
-        return path
+def get_wav_path(file_name: str, aud_dir: str) -> str:
+    """
+    Get the full path of a WAV file.
+
+    Args:
+        file_name (str): The name of the WAV file.
+        aud_dir (str): The directory where the WAV file is located.
+
+    Returns:
+        str: The full path of the WAV file.
+    """
+    path = os.path.join(aud_dir, file_name)
+    return os.fspath(path)
     
         
-def get_wav_label(file_name):
-    digit = file_name.split('-')[0]
-    label = convert_digits().convert_word_2_num(digit)
+digit_converter = convert_digits()
+
+def get_wav_label(file_name: str) -> int:
+    try:
+        digit = file_name.split('-')[0]
+        label = digit_converter.convert_word_2_num(digit)
+    except KeyError:
+        label = None
     return label
 
 

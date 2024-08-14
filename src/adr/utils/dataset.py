@@ -182,7 +182,10 @@ class SeqDataset:
         return data_train, data_test
 
         
-    def save(self, compress: bool = True):
+    def save(self, compress: bool = True) -> None:
+        if not isinstance(self._path, (str, pathlib.Path)):
+            raise ValueError("Invalid file path provided.")
+        
         arrs = {
             'features': self._features,
             'lengths': self._lengths
@@ -194,11 +197,12 @@ class SeqDataset:
         if self._classes is not None:
             arrs['classes'] = self._classes
 
-        save_fun = np.savez_compressed if compress else np.savez
-        save_fun(self._path, **arrs)
-        logger.info(
-            "A npz file has been saved"
-        )
+        if self._path is not None:
+            save_fun = np.savez_compressed if compress else np.savez
+            save_fun(self._path, **arrs)
+            logger.info(
+                f"A npz file has been saved at path: {self._path}"
+            )
         
         
 

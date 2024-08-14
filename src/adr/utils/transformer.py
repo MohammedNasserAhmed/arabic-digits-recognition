@@ -90,18 +90,7 @@ class MFCC(Transform):
         return signal
     
 
-class MinMaxScaler(Scaler):
-    
-    def __init__(self, min: float = 0., max: float = 1.):
-        super().__init__(TransformType.MINMAXSCALER)
-        self.min_val = min
-        self.max_val = max
 
-    def _scale(self, array: np.array):
-        scaled_array = (array - array.min()) / (array.max() - array.min())
-        scaled_array = scaled_array * (self.max_val - self.min_val) + self.min_val
-        return scaled_array
-    
 class Standardiser(Scaler):
 
     def __init__(self):
